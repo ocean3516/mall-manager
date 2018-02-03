@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:context="http://www.springframework.org/schema/context" xmlns:mvc="http://www.springframework.org/schema/mvc"
+	xsi:schemaLocation="http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc.xsd
+		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
+	<!-- 扫包 -->
+	<context:component-scan base-package="org.jyl.mall" use-default-filters="false">
+		<context:include-filter type="annotation" expression="org.springframework.stereotype.Controller" />
+	</context:component-scan>
+	<mvc:annotation-driven></mvc:annotation-driven>
+	<!-- 视图解析器 -->
+	<bean class="org.springframework.web.servlet.view.freemarker.FreeMarkerViewResolver">
+		<property name="suffix" value=".ftl"></property>
+		<property name="contentType" value="text/html;charset=UTF-8"></property>
+	</bean>
+	<bean class="org.springframework.web.servlet.view.freemarker.FreeMarkerConfigurer">
+		<property name="templateLoaderPath" value="/WEB-INF/view/"></property>
+	</bean>
+	<!-- 资源映射 两个*代表的是多级目录 -->
+	<mvc:resources location="/WEB-INF/static/css/" mapping="/css/**" />
+	<mvc:resources location="/WEB-INF/static/js/" mapping="/js/**" />
+	<mvc:resources location="/WEB-INF/static/image/" mapping="/image/**" />
+	<mvc:resources location="/WEB-INF/static/easyui/" mapping="/easyui/**" />
+</beans>
